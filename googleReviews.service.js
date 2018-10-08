@@ -13,75 +13,42 @@
                     var reviewDate = moment(resp.data.date_stored);
                     todaysDate = moment();
                     if (todaysDate.diff(reviewDate, 'days') >= 30){
-                        return vm.getNewReviews();
+                        vm.getNewReviews()
+                        .then(function(resp){
+                            defer.resolve(resp);
+                        }, function(error) {
+                            defer.reject();
+                        });
                     } else {
                         defer.resolve(resp);
                     };
                 } else {
+                    // File at least 30 days old
                     // File needs update
-                    $http.get("api/getVeynasReviews.php")
-                    .then(function (resp) {
-                        if (resp.data && resp.data.status) {
-                            if (resp.data.status == "OK"){    
-                                // Response looks good
-                                // Append date of storage, store, and return
-                                resp.data.date_stored = moment().format();
-                                vm.saveReviews(resp.data);
-                                defer.resolve(resp);
-                            } else {
-                                // Got a response but status is other than OK
-                                // Make status visible
-                                defer.reject(resp.data.status);
-                            }
-                        } else {
-                            // Got response, but nothing worthwhile
-                            defer.reject('1');
-                        }
-                    }, function (error) {
-                        // No response at all
-                        defer.reject('2');
+                    vm.getNewReviews()
+                    .then(function(resp) {
+                        defer.resolve(resp);
+                    }, function(error) {
+                        defer.reject(error);
                     });
                 }
             }, function(error) {
                 // file failed to open or isn't there
                 // make a new one by calling the Google API
-                $http.get("api/getVeynasReviews.php")
-                .then(function (resp) {
-                    if (resp.data && resp.data.status) {
-                        if (resp.data.status == "OK"){    
-                            // Response looks good
-                            // Append date of storage, store, and return
-                            resp.data.date_stored = moment().format();
-                            $http.post("api/saveVeynasReviews.php", resp.data)
-                            .finally(function() {
-                                // There's nothing else to do
-                                defer.resolve(resp);
-                            });
-                        } else {
-                            // Got a response but status is other than OK
-                            // Make status visible
-                            defer.reject(resp.data.status);
-                        }
-                    } else {
-                        // Got response, but nothing worthwhile
-                        defer.reject('1');
-                    }
-                }, function (error) {
-                    // No response at all
-                    defer.reject('2');
+                vm.getNewReviews()
+                .then(function(resp) {
+                    defer.resolve(resp);
+                }, function(error) {
+                    defer.reject(error);
                 });
             });
             return defer.promise;
         };
 
         vm.saveReviews = function(data) {
-            $http.post("api/saveVeynasReviews.php", data)
-            .finally(function() {
-                // There's nothing else to do, file has been written.
-            });
+            return $http.post("api/saveVeynasReviews.php", data);
         };
 
-        // This function is currently not working... (???)
         vm.getNewReviews = function () {
             var defer = $q.defer();
             $http.get("api/getVeynasReviews.php")
@@ -91,7 +58,7 @@
                         // Response looks good
                         // Append date of storage, store, and return
                         resp.data.date_stored = moment().format();
-                        vm.saveReviews(resp.data);
+                        vm.saveReviews(resp.data).finally(function(){});
                         defer.resolve(resp);
                     } else {
                         // Got a response but status is other than OK
