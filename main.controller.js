@@ -1,5 +1,5 @@
 (function () {
-    angular.module('mainApp', [])
+    angular.module('mainApp')
         .controller('mainController', ['$http', 'googleReviewsService', function($http, googleReviewsService) {
             // controller scope
             vm = this;
@@ -25,7 +25,8 @@
                       window.location.hash = hash;
                     });
                   } // End if
-                });
+                })
+              })
                 
                 $(window).scroll(function() {
                   $(".slideanim").each(function(){
@@ -47,7 +48,7 @@
                     vm.prepareReviews(resp.data);
                   }, function (error) {
                     console.log('Could not retrieve Google reviews data.');
-                  })
+                  });
 
                 vm.prepareReviews = function(data) {
                   vm.reviews = [];
@@ -61,7 +62,6 @@
                   vm.reviews[0].active = "active";
                 };
 
-              })
         }]);
-        // module scope
+
 })();
