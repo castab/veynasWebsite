@@ -13,7 +13,7 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
     
 }
 
-// Hit the API for a refreshed JSON payload
+// Function to hit the API for a refreshed JSON payload
 function getNewReviews() {
     // prepare request url
     include_once('access.php'); // $apikey and $placeid
@@ -54,17 +54,22 @@ function getNewReviews() {
 // Store a payload
 // Input is a PHP-native object
 function saveNewReviews($newJSON) {
+    // Wrap up the php object to JSON
     $newJSON = json_encode($newJSON, JSON_UNESCAPED_SLASHES);
+    // Try opening the file
     $fp = fopen('reviews.json', 'w');
     if ( ($fp === false) || (fwrite($fp, $newJSON) === FALSE) ) {
+        // File either didn't open or write successfully
         return FALSE;
     } else {
+        // All good!
         return TRUE;
     }
 }
 
-// ** Main function ** //
-// Try loading the stored JSON payload
+// ** Main process ** //
+// Try loading the stored JSON payload; check for existing before
+// getting a new payload from Google
 if (!($json = @file_get_contents('reviews.json')) === FALSE) {
     // File exists; check for a date
     $response = json_decode($json);
