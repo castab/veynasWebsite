@@ -1,4 +1,4 @@
 (function () {
-    angular.module('mainApp', [])
+    angular.module('VeynasApp', [])
         // module scope
 })();

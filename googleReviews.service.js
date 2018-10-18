@@ -1,10 +1,10 @@
 (function () {
-    angular.module('mainApp')
+    angular.module('VeynasApp')
     .service("googleReviewsService", ['$http', '$q', function($http, $q) {
 
         vm = this;
         
-        vm.getReviews = function () {
+        vm.getAllReviews = function () {
             var defer = $q.defer();
             // Try loading from the local stored copy
             $http.get("api/reviews.json")

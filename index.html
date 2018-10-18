@@ -1,6 +1,6 @@
 <!-- browser-sync start --server --files="**/*" -->
 <!DOCTYPE html>
-<html lang="en">
+<html id="Veynas" lang="en">
 <head>
   <title>Veyna's Trucking</title>
   <meta charset="utf-8">
@@ -25,22 +25,22 @@
   <script src="main.controller.js"></script>
   <script src="googleReviews.service.js"></script>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" ng-app="mainApp" ng-controller="mainController as vm">
+<body data-spy="scroll" data-target=".navbar" data-offset="60" ng-app="VeynasApp" ng-controller="mainController as vm">
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">
+      <a href="#Veynas" class="navbar-brand">
             <img src="media/logo.png" alt="Veyna's Trucking" style="width:150px; position:relative; top:-8px;">
         </a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#services">SERVICES</a></li>
@@ -151,8 +151,7 @@
   <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li ng-repeat="review in vm.reviews" data-target="#myCarousel" data-slide-to="{{review.counter}}" class="{{review.active}}"></li>
     </ol>
 
     <!-- Wrapper for slides -->
@@ -212,13 +211,15 @@
   </div>
 </div>
 
-<div id="bottom" class="container-fluid text-center slideanim">
-  <a href="#myPage" title="To Top">
+<!-- Container (Return to top) -->
+<div class="container-fluid text-center topSelector">
+  <a href="#Veynas" title="To Top">
     <i style="font-size:32px;color:#263238" class="fa fa-chevron-up"></i>
   </a>
   <p>Return to top</p>
 </div>
 
+<!-- Container (Footer) -->
 <footer id="footer" class="container-fluid text-right" style="background-color:#263238;padding:10px 10px;">
       <a href="https://getbootstrap.com/" target="_blank">
         <img data-toggle="tooltip" data-placement="top" title="Bootstrap 4" style="height:25px;color:grey;vertical-align:middle" src="media/bootstrapLogo.png">
