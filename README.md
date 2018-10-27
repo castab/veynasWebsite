@@ -1,5 +1,5 @@
 # Veyna's Trucking Website
-A modern, fast-loading website design using Bootstrap 4, jQuery, Popper, and AngularJS.  Currently in development and viewable: [here](https://www.supernet.tech/Veynas)
+A modern, fast-loading website design using Bootstrap 4, jQuery, Popper, and AngularJS.  Currently in development and viewable: [here](https://www.supernet.tech/veynas)
 
 # Summary
 My Dad's business has been gaining traction and has been slowly reaching customers through word-of-mouth.  To get a jump on marketing, I wrote a responsive, mobile-first website using Bootstrap while using the AngularJS framework for more involved data-binding and manipulation.  Aside from business cards and the logo work on the freight trucks, this will also be an attempt at unifying the company brand.
