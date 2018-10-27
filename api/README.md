@@ -1,4 +1,6 @@
-# The 'API'
+# The Reviews 'API'
+This 'API' handles the Reviews section of the website by populating it with 5 random favorable reviews so that the potential client can see them.
+
 I'd probably call this piece of the entire website the most notable.  I wrote a PHP script that calls [Google's Places API](https://developers.google.com/places/web-service/details) and stores the JSON payload to a file on the hosting server.  Since my Dad's business is relatively new, it's unlikely that new reviews will be posted more frequently than a few weeks or so - this way the website will pull the JSON file directly from itself and load quickly.  Also, to adhere to [Google's Policies](https://cloud.google.com/maps-platform/terms/#3-license), the PHP script will also keep track of how old the JSON file is so that it will go out and fetch a new one as needed.  Currently, Google does not allow a JSON response to be stored for longer than 30 days.
 
 ## RESTful(?)
