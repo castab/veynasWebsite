@@ -20,3 +20,4 @@ I'd like to:
 - Learn about Bootstrap, jQuery, Popper
 - Learn about CSS
 - Can I implement AngularJS? (Edit: Yes, it's possible)
+- What does API mean? [(I took a crack at sort of writing one)](/api)
